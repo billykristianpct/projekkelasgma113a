@@ -389,7 +389,7 @@
     <div class="container main-container">
         <div class="col-md-6 col-md-offset-3">
             <div class="form-container">
-                <h2 class="form-title">🇮🇩 FORM REGISTER USER 🇮🇩</h2>
+                <h2 class="form-title">🇮🇩 Daftar Akun 🇮🇩</h2>
                 <p class="independence-subtitle">Selamat Hari Kemerdekaan Indonesia ke-80!</p>
                 <hr>
                 
