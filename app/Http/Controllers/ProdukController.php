@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Produk;
+use App\Models\Produkmodel;      
 
 class ProdukController extends Controller
 {
@@ -19,11 +19,11 @@ class ProdukController extends Controller
 
     public function simpanproduk(Request $request)
     {
-        $santri = produk::create([
+        $produk= Produkmodel::create([
             'nm_produk' => $request->nm_produk,
             'harga' => $request->harga,
             'qty' => $request->qty,
-            'jumlah' => $request->jumlah,
+            'jumlah' => $request->qty*$request->harga,
         ]);
 
         return redirect()->route('produk');
