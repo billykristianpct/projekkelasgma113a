@@ -392,11 +392,17 @@
                 <h2 class="form-title">🇮🇩 FORM REGISTER USER 🇮🇩</h2>
                 <p class="independence-subtitle">Selamat Hari Kemerdekaan Indonesia ke-80!</p>
                 <hr>
-                  @if
-                <div class="alert alert-success" style="display: none;" id="successAlert">
-                    <i class="fa fa-check-circle"></i> Registrasi berhasil! Merdeka! 🎉
-                </div>
-                @endif
+                
+                @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
                    <form action="{{ route('registerproses') }}" method="post">
                          @csrf
                 <form id="registerForm">

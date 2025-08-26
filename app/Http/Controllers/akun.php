@@ -8,41 +8,40 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
-class akun extends Controller
+class Akun extends Controller
 {
-      public function register()
+    public function register()
     {
         return view('register');
     }
-    
+
     public function registerproses(Request $request)
     {
-      
-        $user = User::create([
+        // 🔹 Validasi dulu sebelum insert
+        $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'username' => 'required|min:3|max:20|unique:users,username',
+            'password' => 'required|min:6|confirmed',
+            'role' => 'nullable|string'
+        ]);
+
+        // 🔹 Baru buat user jika validasi lolos
+        User::create([
             'email' => $request->email,
             'username' => $request->username,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
-         
+            'role' => $request->role ?? 'user', // default "user" kalau kosong
         ]);
-
-            $request->validate([
-             'email' => 'required|email|unique:users',
-            'username' => 'required|min:3|max:20|unique:users',
-            'password' => 'required|min:6|confirmed',
-            'role' => 'required'
-   
-            ]);
-         
 
         Session::flash('message', 'Register Berhasil. Akun Anda sudah Aktif silahkan Login menggunakan username dan password.');
         return redirect('/');
     }
- public function login()
+
+    public function login()
     {
         if (Auth::check()) {
             return redirect('home');
-        }else{
+        } else {
             return view('login');
         }
     }
@@ -54,9 +53,9 @@ class akun extends Controller
             'password' => $request->input('password'),
         ];
 
-        if (Auth::Attempt($data)) {
+        if (Auth::attempt($data)) {
             return redirect('home');
-        }else{
+        } else {
             Session::flash('error', 'Username atau Password Salah');
             return redirect('/login');
         }
@@ -67,10 +66,9 @@ class akun extends Controller
         Auth::logout();
         return redirect('/');
     }
-    
- public function index()
+
+    public function index()
     {
         return view('home');
     }
-
 }
