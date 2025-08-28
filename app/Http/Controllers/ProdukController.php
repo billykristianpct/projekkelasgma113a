@@ -9,7 +9,9 @@ class ProdukController extends Controller
 {
      public function produk()
     {
-        return view('produk');
+      $produk = Produkmodel::select('*')->get();
+                
+        return view('produk', ['produk' => $produk]);
     }
 
     public function tambahproduk()
@@ -28,4 +30,13 @@ class ProdukController extends Controller
 
         return redirect()->route('produk');
     }
+
+
+    // public function tampilproduk()
+    // {
+    //     $produk = Produkmodel::select('*')->get();
+                
+    //     return view('tampilproduk', ['produk' => $produk]);
+    // }
 }
+

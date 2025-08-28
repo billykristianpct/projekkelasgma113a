@@ -25,3 +25,5 @@ Route::get('logout', [akun::class, 'logout'])->name('logout')->middleware('auth'
 Route::get('produk', [ProdukController::class, 'produk'])->name('produk')->middleware('auth');
 Route::get('tambahproduk', [ProdukController::class, 'tambahproduk'])->name('tambahproduk')->middleware('auth');
 Route::post('simpanproduk', [ProdukController::class, 'simpanproduk'])->name('simpanproduk')->middleware('auth');
+
+Route::get('tampilproduk', [ProdukController::class, 'tampilproduk'])->name('tampilproduk')->middleware('auth');
